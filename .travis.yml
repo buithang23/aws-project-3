@@ -6,13 +6,13 @@ env:
   - DOCKER_COMPOSE_VERSION=1.23.2
   - POSTGRES_USERNAME=thangbv2
   - POSTGRES_PASSWORD=12345678
- - POSTGRES_HOST=postgres.cflh56asb7e2.us-east-1.rds.amazonaws.com
- - POSTGRES_DB=postgres
- - AWS_BUCKET=elasticbeanstalk-us-east-1-750532918907
- - AWS_REGION=us-east-1
- - AWS_PROFILE=default
- - JWT_SECRET=testing
- - URL=http://localhost:8100
+  - POSTGRES_HOST=postgres.cflh56asb7e2.us-east-1.rds.amazonaws.com
+  - POSTGRES_DB=postgres
+  - AWS_BUCKET=elasticbeanstalk-us-east-1-750532918907
+  - AWS_REGION=us-east-1
+  - AWS_PROFILE=default
+  - JWT_SECRET=testing
+  - URL=http://localhost:8100
 
 before_install:
   - docker -v && docker-compose -v

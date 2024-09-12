@@ -20,16 +20,16 @@ script:
   - docker build -t udagram-api-feed .
   - docker build -t udagram-frontend .
   # tag
-  - docker tag reverseproxy buithang23/reverseproxy:v1
-  - docker tag udagram-api-user buithang23/udagram-api-user:v1
-  - docker tag udagram-api-feed buithang23/udagram-api-feed:v1
-  - docker tag udagram-frontend buithang23/udagram-frontend:v1
+  - docker tag reverseproxy buithang23/reverseproxy:v1a
+  - docker tag udagram-api-user buithang23/udagram-api-user:v1a
+  - docker tag udagram-api-feed buithang23/udagram-api-feed:v1a
+  - docker tag udagram-frontend buithang23/udagram-frontend:v1a
   
 
 # Tasks to perform after the process is successful. Formatting the Docker username and password as below enables you to programmatically log in without having the password exposed in logs.
 after_success:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - docker push buithang23/reverseproxy:v1
-  - docker push buithang23/udagram-api-user:v1
-  - docker push buithang23/udagram-api-feed:v1
-  - docker push buithang23/udagram-frontend:v1
+  - docker push buithang23/reverseproxy
+  - docker push buithang23/udagram-api-user
+  - docker push buithang23/udagram-api-feed
+  - docker push buithang23/udagram-frontend

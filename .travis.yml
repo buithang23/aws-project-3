@@ -13,6 +13,7 @@ before_script:
 
 script:
   - docker --version # Print the version for logging
+  - docker pull nginx
   - docker-compose -f docker-compose-build.yaml build
 
 after_success:

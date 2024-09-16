@@ -13,9 +13,9 @@ before_script:
 
 script:
   - docker --version # Print the version for logging
-  - docker pull nginx
+  - docker pull nginx:alpine
   - docker-compose -f docker-compose-build.yaml build
 
 after_success:
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME"--password-stdin
   - docker-compose -f docker-compose-build.yaml push

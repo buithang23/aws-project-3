@@ -16,5 +16,12 @@ script:
   - docker-compose -f docker-compose-build.yaml build
 
 after_success:
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME"--password-stdin
-  - docker-compose -f docker-compose-build.yaml push
+  - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+  - docker tag reverseproxy:v1a buithang23/reverseproxy:v1a
+  - docker push buithang23/reverseproxy:v1a
+  - docker tag udagram-api-user:v1a buithang23/udagram-api-user:v1a
+  - docker push buithang23/udagram-api-user:v1a
+  - docker tag udagram-api-feed:v1a buithang23/udagram-api-feed:v1a
+  - docker push buithang23/udagram-api-feed:v1a
+  - docker tag udagram-frontend:local buithang23/udagram-frontend:local
+  - docker push buithang23/udagram-frontend:local

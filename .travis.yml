@@ -13,7 +13,7 @@ before_script:
 
 script:
   - docker --version # Print the version for logging
-  - docker-compose -f docker-compose-build.yaml build
+  - docker-compose -f docker-compose-build.yaml build --parallel
 
 after_success:
   - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD

@@ -13,5 +13,5 @@ RUN export NODE_OPTIONS="--openssl-legacy-provider --no-experimental-fetch" ioni
 ##
 FROM nginx:alpine
 #COPY www /usr/share/nginx/html
-COPY --from=ionic  /usr/www /usr/share/nginx/html
+COPY --from=ionic  /usr /usr/share/nginx/html
 

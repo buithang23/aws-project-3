@@ -1,32 +1,31 @@
-  
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    service: frontend
-  name: frontend
+    service: reverseproxy
+  name: reverseproxy
 spec:
+  replicas: 1
   selector:
     matchLabels:
-      service: frontend
-  replicas: 1
+      service: reverseproxy
   template:
     metadata:
       labels:
-        service: frontend
-        api: external        
+        service: reverseproxy
+      name: api-user
     spec:
       containers:
-      - image: buithang23/udagram-frontend:local
-        name: frontend
-        imagePullPolicy: Always          
-        ports:
-        - containerPort: 80
-        resources:
-          requests:
-            memory: "64Mi"
-            cpu: "250m"
-          limits:
-            memory: "1024Mi"
-            cpu: "500m"                
+        - image: thangbv2/reverseproxy:v1a
+          name: reverseproxy
+          imagePullPolicy: Always
+          resources:
+            requests:
+              memory: '64Mi'
+              cpu: '250m'
+            limits:
+              memory: '1024Mi'
+              cpu: '500m'
+          ports:
+            - containerPort: 8080
       restartPolicy: Always

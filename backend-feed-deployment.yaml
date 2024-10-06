@@ -2,21 +2,21 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    service: api-feed
-  name: api-feed
+    service: backend-feed
+  name: backend-feed
 spec:
   selector:
     matchLabels:
-      service: api-feed
+      service: backend-feed
   replicas: 1
   template:
     metadata:
       labels:
-        service: api-feed
+        service: backend-feed
     spec:
       containers:
       - image: buithang23/udagram-api-feed:v1a
-        name: api-feed
+        name: backend-feed
         imagePullPolicy: Always  
         resources:
           requests:

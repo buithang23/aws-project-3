@@ -2,21 +2,21 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    service: backend-user
-  name: backend-user
+    service: api-user
+  name: api-user
 spec:
   selector:
     matchLabels:
-      service: backend-user
+      service: api-user
   replicas: 1
   template:
     metadata:
       labels:
-        service: backend-user
+        service: api-user
     spec:
       containers:
       - image: buithang23/udagram-api-user:v1a
-        name: backend-user 
+        name: api-user 
         imagePullPolicy: Always  
         resources:
           requests:

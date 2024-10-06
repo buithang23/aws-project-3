@@ -1,6 +1,7 @@
 ## Build
 FROM beevelop/ionic AS ionic
 # Create app directory
+RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
@@ -13,5 +14,5 @@ RUN export NODE_OPTIONS="--openssl-legacy-provider --no-experimental-fetch" ioni
 ##
 FROM nginx:alpine
 #COPY www /usr/share/nginx/html
-COPY --from=ionic  /usr /usr/share/nginx/html
+COPY --from=ionic  /usr/src/www /usr/share/nginx/html
 

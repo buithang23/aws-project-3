@@ -11,7 +11,5 @@ RUN npm ci
 COPY . .
 RUN export NODE_OPTIONS="--openssl-legacy-provider --no-experimental-fetch" ionic build
 ##
-FROM nginx:alpine
-#COPY www /usr/share/nginx/html
-COPY --from=ionic  /usr/src/www /usr/share/nginx/html
+
 

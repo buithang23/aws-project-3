@@ -8,6 +8,8 @@ data:
   POSTGRESS_DB: postgres
   POSTGRESS_HOST: postgres.ch5adtgiyal0.us-east-1.rds.amazonaws.com
   URL: http://localhost:8100  
+  POSTGRESS_USERNAME: thangbv2
+  POSTGRESS_PASSWORD: "12345678"
 metadata:
   name: env-config
   

@@ -8,7 +8,7 @@ spec:
   selector:
     matchLabels:
       service: api-feed
-  replicas: 2
+  replicas: 1
   template:
     metadata:
       labels:
@@ -63,14 +63,14 @@ spec:
               key: POSTGRESS_HOST
         - name: POSTGRESS_PASSWORD
           valueFrom:
-            secretKeyRef:
-              name: env-secret
+            configMapKeyRef:
+              name: env-config
               key: POSTGRESS_PASSWORD
         - name: POSTGRESS_USERNAME
           valueFrom:
-            secretKeyRef:
-              name: env-secret
-              key: POSTGRESS_USERNAME      
+            configMapKeyRef:
+              name: env-config
+              key: POSTGRESS_USERNAME   
         volumeMounts:
         - name: aws-secret
           mountPath: "/root/.aws/"

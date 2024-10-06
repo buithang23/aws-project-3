@@ -1,26 +1,27 @@
-language: minimal
-services: docker
-env:
-  - DOCKER_COMPOSE_VERSION=1.23.2
-before_install:
-  - docker -v && docker-compose -v
-  - sudo rm /usr/local/bin/docker-compose
-  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
-  - chmod +x docker-compose
-  - sudo mv docker-compose /usr/local/bin
-  - curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
-  - chmod +x ./kubectl
-  - sudo mv ./kubectl /usr/local/bin/kubectl
+language: node_js
+node_js:
+  - 12
+
+services:
+  - docker
+
+# Pre-testing installs
 install:
-  - docker-compose -f docker-compose-build.yaml build --parallel
+  - echo "nothing needs to be installed"
+
+script:
+  - docker --version # print the version for logging
+  # Build
+  - docker-compose -f docker-compose-build.yaml build
+  # Tagging
+  - docker tag udagram-api-feed:v1a buithang23/udagram-api-feed:v1a
+  - docker tag udagram-api-user:v1a buithang23/udagram-api-user:v1a
+  - docker tag udagram-frontend:local buithang23/udagram-frontend:local
+  - docker tag reverseproxy:v1a buithang23/reverseproxy:v1a
 
 after_success:
   - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-  - docker tag reverseproxy:v1a buithang23/reverseproxy:v1a
   - docker push buithang23/reverseproxy:v1a
-  - docker tag udagram-api-user:v1a buithang23/udagram-api-user:v1a
   - docker push buithang23/udagram-api-user:v1a
-  - docker tag udagram-api-feed:v1a buithang23/udagram-api-feed:v1a
   - docker push buithang23/udagram-api-feed:v1a
-  - docker tag udagram-frontend:local buithang23/udagram-frontend:local
   - docker push buithang23/udagram-frontend:local

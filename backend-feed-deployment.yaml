@@ -2,21 +2,21 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    service: api-feed
+    service: backend-feed
   name: backend-feed
 spec:
   selector:
     matchLabels:
-      service: api-feed
+      service: backend-feed
   replicas: 2
   template:
     metadata:
       labels:
-        service: api-feed
+        service: backend-feed
     spec:
       containers:
       - image: buithang23/udagram-api-feed:v1a
-        name: api-feed
+        name: backend-feed
         imagePullPolicy: Always  
         resources:
           requests:
@@ -63,14 +63,14 @@ spec:
               key: POSTGRESS_HOST
         - name: POSTGRESS_PASSWORD
           valueFrom:
-            configMapKeyRef:
-              name: env-config
+            secretKeyRef:
+              name: env-secret
               key: POSTGRESS_PASSWORD
         - name: POSTGRESS_USERNAME
           valueFrom:
-            configMapKeyRef:
-              name: env-config
-              key: POSTGRESS_USERNAME   
+            secretKeyRef:
+              name: env-secret
+              key: POSTGRESS_USERNAME      
         volumeMounts:
         - name: aws-secret
           mountPath: "/root/.aws/"

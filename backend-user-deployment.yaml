@@ -2,21 +2,21 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    service: backend-user
+    service: api-user
   name: backend-user
 spec:
   selector:
     matchLabels:
-      service: backend-user
+      service: api-user
   replicas: 2
   template:
     metadata:
       labels:
-        service: backend-user
+        service: api-user
     spec:
       containers:
       - image: buithang23/udagram-api-user:v1a
-        name: backend-user 
+        name: api-user 
         imagePullPolicy: Always  
         resources:
           requests:
@@ -48,13 +48,13 @@ spec:
               key: POSTGRESS_HOST
         - name: POSTGRESS_PASSWORD
           valueFrom:
-            configMapKeyRef:
-              name: env-config
+            secretKeyRef:
+              name: env-secret
               key: POSTGRESS_PASSWORD
         - name: POSTGRESS_USERNAME
           valueFrom:
-            configMapKeyRef:
-              name: env-config
+            secretKeyRef:
+              name: env-secret
               key: POSTGRESS_USERNAME
       restartPolicy: Always
 
